@@ -1,0 +1,21 @@
+{
+	"name": "elliot",
+	"description": "Gig tracker for Elliott Rooney",
+	"version": "1.0.0",
+	"main": "index.php",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/sirbully/gigs-tracker.git"
+	},
+	"keywords": [],
+	"author": "Krizza Bullecer",
+	"license": "ISC",
+	"devDependencies": {
+		"@prettier/plugin-php": "^0.14.0",
+		"eslint": "^6.8.0",
+		"prettier": "^2.0.2"
+	}
+}
