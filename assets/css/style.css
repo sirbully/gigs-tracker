@@ -48,3 +48,15 @@ nav ul a.active {
 nav a.web-logout:hover::after {
 	content: " →";
 }
+
+h1 {
+	font-family: "Playfair Display", Arial, Helvetica, sans-serif;
+	text-transform: capitalize;
+	font-size: 4rem;
+}
+
+h4 {
+	font-family: "IBM Plex Mono", Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 0.2rem;
+}
