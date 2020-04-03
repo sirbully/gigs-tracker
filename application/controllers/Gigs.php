@@ -25,8 +25,7 @@ class Gigs extends CI_Controller
 
     public function create()
     {
-        $data['success'] = false;
-        $this->form_validation->set_rules('datetime', 'Date and time', 'required');
+        $this->form_validation->set_rules('date', 'Date', 'required');
         $this->form_validation->set_rules('type', 'Type', 'required');
         $this->form_validation->set_rules('location', 'Location', 'required');
         $this->form_validation->set_rules('client', 'Client', 'required');
@@ -35,14 +34,41 @@ class Gigs extends CI_Controller
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header');
-            $this->load->view('gigs/create', $data);
+            $this->load->view('gigs/create');
             $this->load->view('templates/footer');
         } else {
             $this->gig_model->new_gig();
-            $data['success'] = true;
-            $this->load->view('templates/header');
-            $this->load->view('gigs/create', $data);
-            $this->load->view('templates/footer');
+            // $this->session->set_flashdata('success', 1);
+            redirect("gigs");
         }
+    }
+
+    public function edit($id)
+    {
+        $this->form_validation->set_rules('date', 'Date', 'required');
+        $this->form_validation->set_rules('type', 'Type', 'required');
+        $this->form_validation->set_rules('location', 'Location', 'required');
+        $this->form_validation->set_rules('client', 'Client', 'required');
+        $this->form_validation->set_rules('dress', 'Dress code', 'required');
+        $this->form_validation->set_rules('pay', 'Pay', 'required');
+
+        $data['gig'] = $this->gig_model->get_gigs($id);
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('templates/header');
+            $this->load->view('gigs/edit', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->gig_model->edit_gig($id);
+            // $this->session->set_flashdata('success', 1);
+            redirect("gigs");
+        }
+    }
+
+    public function delete($id)
+    {
+        $this->gig_model->delete_gig($id);
+        // $this->session->set_flashdata('success', 1);
+        redirect("gigs");
     }
 }
