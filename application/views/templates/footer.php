@@ -1,7 +1,7 @@
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/vuejs-datepicker"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
     var app = new Vue({
         el: '#app',
@@ -10,12 +10,8 @@
             let params = new URLSearchParams(uri);
             this.page = params.get("page");
         },
-        components: {
-            vuejsDatepicker
-        },
         data: {
-            page: null,
-            form_success: '<?= $success === false ? 'false' : 'true' ?>'
+            page: null
         },
         methods: {
             toCurrency(num) {
@@ -27,6 +23,13 @@
             }
         }
     })
+</script>
+<script>
+    document.onreadystatechange = () => {
+        if (document.readyState == "interactive") {
+            flatpickr("#datepicker", {});
+        }
+    }
 </script>
 
 </body>
