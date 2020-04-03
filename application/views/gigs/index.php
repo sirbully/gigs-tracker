@@ -1,1 +1,48 @@
-<h2>Gigs</h2>
+<h3>List of Gigs for</h3>
+<h1>Elliot rooney</h1>
+
+<div id="table">
+    <div class="container">
+        <div id="thead" class="row">
+            <p><span>Date</span></p>
+            <p><span>Type</span></p>
+            <p><span>Location</span></p>
+            <p><span>Client</span></p>
+            <p><span>Status</span></p>
+            <p><span>Actions</span></p>
+        </div>
+        <?php
+        $perPage = 10;
+        $page = isset($_GET['page']) ? intval($_GET['page'] - 1) : 0;
+        $numberOfPages = intval(count($gigs) / $perPage) + 1;
+        foreach (array_slice($gigs, $page * $perPage, $perPage) as $gig) :
+            $date = new DateTime($gig['date']); ?>
+            <div class="row tbody">
+                <p><?= date_format($date, 'F jS, Y,') ?><br /><?= date_format($date, 'l \a\t g:ia') ?></p>
+                <p><?= $gig['type'] ?></p>
+                <p><?= $gig['location'] ?></p>
+                <p><?= $gig['client'] ?></p>
+                <p><?= $gig['status'] ?></p>
+                <p>
+                    <a href="<?= base_url() . 'gigs/' . $gig['id'] ?>">View</a>
+                    <a href="">Calendar</a>
+                    <a href="">Edit</a>
+                    <a href="">Cancel</a>
+                </p>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+<ul id="pagination" class="row my-5 justify-content-center">
+    <li class="mr-2">
+        <a href=""><i class="fas fa-angle-double-left"></i></a>
+    </li>
+    <?php
+    for ($i = 1; $i <= $numberOfPages; $i++) : ?>
+        <li class="mr-2"><a href='./?page=<?= $i ?>'><?= $i ?></a></li>
+    <?php endfor; ?>
+    <li>
+        <a href=""><i class="fas fa-angle-double-right"></i></a>
+    </li>
+</ul>
