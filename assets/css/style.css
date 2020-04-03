@@ -67,15 +67,51 @@ h3 {
 	margin-bottom: -0.5rem;
 }
 
+input,
+button {
+	border: none;
+	background: transparent;
+}
+
+input {
+	border: 2px solid rgb(34, 34, 34);
+	padding: 5px 10px;
+	font-family: "IBM Plex Sans", Arial, Helvetica, sans-serif;
+	font-size: 1rem;
+}
+
+button,
+.btn {
+	cursor: pointer;
+	border: 2px solid rgb(34, 34, 34);
+	padding: 5px 10px;
+	font-family: "IBM Plex Mono", Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+	transition: background 0.5s ease;
+	font-size: 1.25rem;
+}
+
+button:hover,
+.btn:hover {
+	background: rgb(34, 34, 34);
+	color: #fff;
+}
+
+label {
+	padding: 5px 10px;
+	background: rgb(34, 34, 34);
+	font-size: 1.25rem;
+	color: #fff;
+	font-family: "IBM Plex Mono", Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+}
+
 #add-gig {
-	position: relative;
-	bottom: -25px;
-	right: -86%;
+	margin: -40px 0 20px;
 }
 
 #add-gig span {
-	border-top: 2px solid rgb(34, 34, 34);
-	padding: 5px 10px 9px;
+	padding: 5px 12px 5px 10px;
 	font-family: "IBM Plex Mono", Arial, Helvetica, sans-serif;
 	text-transform: uppercase;
 	transition: background 0.5s ease;
@@ -210,4 +246,14 @@ h3 {
 #view-action small {
 	font-family: "IBM Plex Mono", Arial, Helvetica, sans-serif;
 	text-transform: uppercase;
+}
+
+.form-group {
+	margin: 20px 0;
+	display: flex;
+	justify-content: space-between;
+}
+
+.form-group input {
+	width: 80%;
 }
