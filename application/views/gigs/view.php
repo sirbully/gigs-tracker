@@ -32,8 +32,8 @@
             <p><?= $gig['status'] === '1' ? 'Confirmed' : 'Canceled' ?></p>
         </div>
         <div class="row trow">
-            <p>Date and Time</p>
-            <p><?= date_format(new DateTime($gig['date']), 'l F j, Y, g:iA') ?></p>
+            <p>Date</p>
+            <p><?= date_format(new DateTime($gig['date']), 'l F j, Y') ?></p>
         </div>
         <div class="row trow">
             <p>Type</p>
@@ -53,7 +53,7 @@
         </div>
         <div class="row trow">
             <p>Pay</p>
-            <p><?= $gig['pay'] ?></p>
+            <p>{{ toCurrency(<?= $gig['pay'] ?>) }}</p>
         </div>
     </div>
 </div>

@@ -2,7 +2,7 @@
 <h1>Elliot rooney</h1>
 
 <p id="add-gig">
-    <a href="<?= base_url() ?>">
+    <a href="<?= base_url() . 'gigs/create' ?>">
         <span>Add New Gig</span>
     </a>
 </p>
@@ -23,7 +23,7 @@
         foreach (array_slice($gigs, $page * $perPage, $perPage) as $gig) :
             $date = new DateTime($gig['date']); ?>
             <div class="row tbody">
-                <p><?= date_format($date, 'F jS, Y,') ?><br /><?= date_format($date, 'l \a\t g:ia') ?></p>
+                <p><?= date_format($date, 'l, F jS, Y') ?></p>
                 <p><?= $gig['type'] ?></p>
                 <p><?= $gig['location'] ?></p>
                 <p><?= $gig['client'] ?></p>
