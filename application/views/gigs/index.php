@@ -1,15 +1,17 @@
 <h3>List of Gigs for</h3>
-<h1>Elliot rooney</h1>
+<h1><?= $this->session->userdata('user_name') ?></h1>
 
 <div id="table">
     <div class="container">
-        <div style="text-align: right">
-            <p id="add-gig">
-                <a href="<?= base_url() . 'gigs/create' ?>">
-                    <span>Add New Gig</span>
-                </a>
-            </p>
-        </div>
+        <?php if ($this->session->userdata('isAdmin')) : ?>
+            <div style="text-align: right">
+                <p id="add-gig">
+                    <a href="<?= base_url() . 'gigs/create' ?>">
+                        <span>Add New Gig</span>
+                    </a>
+                </p>
+            </div>
+        <?php endif; ?>
         <?php if (empty($gigs)) : ?>
             <div id="thead" class="row">
                 <p><span>No gigs booked yet.</span></p>
@@ -40,12 +42,14 @@
                         <a href="">
                             <i class="far fa-calendar-plus"></i>
                         </a>
-                        <a href="<?= base_url() ?>gigs/edit/<?= $gig['id'] ?>">
-                            <i class="far fa-edit"></i>
-                        </a>
-                        <a href="<?= base_url() ?>gigs/delete/<?= $gig['id'] ?>">
-                            <i class="far fa-trash-alt"></i>
-                        </a>
+                        <?php if ($this->session->userdata('isAdmin')) : ?>
+                            <a href="<?= base_url() ?>gigs/edit/<?= $gig['id'] ?>">
+                                <i class="far fa-edit"></i>
+                            </a>
+                            <a href="<?= base_url() ?>gigs/delete/<?= $gig['id'] ?>">
+                                <i class="far fa-trash-alt"></i>
+                            </a>
+                        <?php endif; ?>
                     </p>
                 </div>
         <?php endforeach;
