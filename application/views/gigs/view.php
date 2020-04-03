@@ -9,7 +9,7 @@
                 <span>Basic Info</span>
             </p>
             <div id="view-action">
-                <a href="<?= base_url() . 'gigs' ?>">
+                <a href="<?= base_url() ?>gigs">
                     <i class="fas fa-arrow-left"></i>
                     <small>Go Back</small>
                 </a>
@@ -17,19 +17,15 @@
                     <i class="far fa-calendar-plus"></i>
                     <small>Calendar</small>
                 </a>
-                <a>
+                <a href="<?= base_url() ?>gigs/edit/<?= $gig['id'] ?>">
                     <i class="far fa-edit"></i>
                     <small>Edit</small>
                 </a>
-                <a>
-                    <i class="far fa-times-circle"></i>
-                    <small>Cancel</small>
+                <a href="<?= base_url() ?>gigs/delete/<?= $gig['id'] ?>">
+                    <i class="far fa-trash-alt"></i>
+                    <small>Delete</small>
                 </a>
             </div>
-        </div>
-        <div class="row trow">
-            <p>Booking Status</p>
-            <p><?= $gig['status'] === '1' ? 'Confirmed' : 'Canceled' ?></p>
         </div>
         <div class="row trow">
             <p>Date</p>
