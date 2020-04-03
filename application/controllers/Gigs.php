@@ -1,6 +1,15 @@
 <?php
 class Gigs extends CI_Controller
 {
+    function __construct()
+    {
+        parent::__construct();
+
+        if (!$this->session->has_userdata('isloggedin')) {
+            redirect('members');
+        }
+    }
+
     public function index()
     {
         $data['gigs'] = $this->gig_model->get_gigs();
@@ -25,6 +34,10 @@ class Gigs extends CI_Controller
 
     public function create()
     {
+        if (!$this->session->userdata('isAdmin')) {
+            show_404();
+        }
+
         $this->form_validation->set_rules('date', 'Date', 'required');
         $this->form_validation->set_rules('type', 'Type', 'required');
         $this->form_validation->set_rules('location', 'Location', 'required');
@@ -45,6 +58,10 @@ class Gigs extends CI_Controller
 
     public function edit($id)
     {
+        if (!$this->session->userdata('isAdmin')) {
+            show_404();
+        }
+
         $this->form_validation->set_rules('date', 'Date', 'required');
         $this->form_validation->set_rules('type', 'Type', 'required');
         $this->form_validation->set_rules('location', 'Location', 'required');
@@ -67,6 +84,10 @@ class Gigs extends CI_Controller
 
     public function delete($id)
     {
+        if (!$this->session->userdata('isAdmin')) {
+            show_404();
+        }
+
         $this->gig_model->delete_gig($id);
         $this->session->set_flashdata('delete-gig', "The gig was successfully deleted!");
         redirect("gigs");

@@ -2,6 +2,17 @@
 
 class Musicians extends CI_Controller
 {
+    function __construct()
+    {
+        parent::__construct();
+
+        if (!$this->session->has_userdata('isloggedin')) {
+            redirect('members');
+        } elseif (!$this->session->userdata('isAdmin')) {
+            show_404();
+        }
+    }
+
     public function index()
     {
         $data['musicians'] = $this->musician_model->get_musicians();
