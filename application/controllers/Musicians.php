@@ -4,7 +4,7 @@ class Musicians extends CI_Controller
 {
     public function index()
     {
-        $data['musician'] = $this->musician_model->get_musicians();
+        $data['musicians'] = $this->musician_model->get_musicians();
 
         $this->load->view('templates/header');
         $this->load->view('musicians/index', $data);
@@ -13,12 +13,9 @@ class Musicians extends CI_Controller
 
     public function create()
     {
-        $this->form_validation->set_rules('date', 'Date', 'required');
-        $this->form_validation->set_rules('type', 'Type', 'required');
-        $this->form_validation->set_rules('location', 'Location', 'required');
-        $this->form_validation->set_rules('client', 'Client', 'required');
-        $this->form_validation->set_rules('dress', 'Dress code', 'required');
-        $this->form_validation->set_rules('pay', 'Pay', 'required');
+        $this->form_validation->set_rules('name', 'Name', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|callback_check_email');
+        $this->form_validation->set_rules('password', 'Password');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header');
@@ -26,7 +23,7 @@ class Musicians extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->musician_model->new_musician();
-            $this->session->set_flashdata('success', 1);
+            $this->session->set_flashdata('add-user', "The musician was successfully added!");
             redirect("musicians");
         }
     }
@@ -34,7 +31,17 @@ class Musicians extends CI_Controller
     public function delete($id)
     {
         $this->musician_model->delete_musician($id);
-        $this->session->set_flashdata('success', 1);
+        $this->session->set_flashdata('delete-user', "The musician was successfully removed!");
         redirect("musicians");
+    }
+
+    public function check_email($email)
+    {
+        $this->form_validation->set_message('check_email', 'This email has already been registered.');
+        if ($this->musician_model->check_email($email)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
