@@ -27,4 +27,5 @@
             <a class="web-logout" href="<?= base_url() ?>/logout">Logout</a>
         </nav>
 
+        <div id="snackbar">Some text some message..</div>
         <div class="container">
