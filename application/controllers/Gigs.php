@@ -25,8 +25,24 @@ class Gigs extends CI_Controller
 
     public function create()
     {
-        $this->load->view('templates/header');
-        $this->load->view('gigs/create');
-        $this->load->view('templates/footer');
+        $data['success'] = false;
+        $this->form_validation->set_rules('datetime', 'Date and time', 'required');
+        $this->form_validation->set_rules('type', 'Type', 'required');
+        $this->form_validation->set_rules('location', 'Location', 'required');
+        $this->form_validation->set_rules('client', 'Client', 'required');
+        $this->form_validation->set_rules('dress', 'Dress code', 'required');
+        $this->form_validation->set_rules('pay', 'Pay', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('templates/header');
+            $this->load->view('gigs/create', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->gig_model->new_gig();
+            $data['success'] = true;
+            $this->load->view('templates/header');
+            $this->load->view('gigs/create', $data);
+            $this->load->view('templates/footer');
+        }
     }
 }
