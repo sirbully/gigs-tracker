@@ -34,6 +34,11 @@ nav .brand {
 
 nav .brand a {
 	color: #f9f3f2;
+}
+
+nav .brand a,
+nav ul a,
+nav a.web-logout {
 	font-family: "IBM Plex Mono", Arial, Helvetica, sans-serif;
 	text-transform: uppercase;
 	letter-spacing: 0.2rem;
@@ -41,12 +46,12 @@ nav .brand a {
 
 nav ul a:hover,
 nav ul a.active {
-	padding-top: 2px;
-	border-top: 2px solid #000;
+	padding-bottom: 2px;
+	border-bottom: 2px solid #000;
 }
 
 nav a.web-logout:hover::after {
-	content: " →";
+	content: "→";
 }
 
 h1 {
@@ -55,8 +60,82 @@ h1 {
 	font-size: 4rem;
 }
 
-h4 {
+h3 {
 	font-family: "IBM Plex Mono", Arial, Helvetica, sans-serif;
 	text-transform: uppercase;
 	letter-spacing: 0.2rem;
+	margin-bottom: -0.5rem;
+}
+
+#table {
+	width: 100%;
+	text-align: left;
+	margin-top: 45px;
+}
+
+#thead {
+	background: #f9f3f2;
+	/* color: #fff; */
+	border-top: 2px solid #000;
+	border-bottom: 2px solid #000;
+	position: sticky;
+	top: 0;
+}
+
+#thead > p {
+	font-family: "IBM Plex Mono", Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 0.05rem;
+	padding: 20px 10px;
+	/* border-right: 2px solid #000; */
+}
+
+#thead span {
+	color: #fff;
+	background: rgb(34, 34, 34);
+	padding: 5px 10px;
+	font-size: 1.4rem;
+}
+
+#thead > p:nth-child(2),
+#thead > p:nth-child(5),
+.tbody > p:nth-child(2),
+.tbody > p:nth-child(5) {
+	flex: 1 1 10%;
+}
+
+#thead > p:nth-child(3),
+#thead > p:nth-child(4),
+.tbody > p:nth-child(3),
+.tbody > p:nth-child(4) {
+	flex: 1 1 15%;
+}
+
+#thead > p:nth-child(1),
+#thead > p:nth-child(6),
+.tbody > p:nth-child(1),
+.tbody > p:nth-child(6) {
+	flex: 1 1 20%;
+}
+
+#thead > p:last-child {
+	border-right: none;
+}
+
+.tbody {
+	border-bottom: 2px solid #000;
+}
+
+.tbody > p {
+	flex: 1 1 auto;
+	padding: 20px 10px;
+	/* border-right: 2px solid #000; */
+}
+
+.tbody > p:last-child {
+	border-right: none;
+}
+
+.tbody:last-child {
+	border-bottom: none;
 }
