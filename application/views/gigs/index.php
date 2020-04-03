@@ -1,6 +1,11 @@
 <h3>List of Gigs for</h3>
 <h1>Elliot rooney</h1>
 
+<p id="add-gig">
+    <a href="<?= base_url() ?>">
+        <span>Add New Gig</span>
+    </a>
+</p>
 <div id="table">
     <div class="container">
         <div id="thead" class="row">
@@ -22,27 +27,27 @@
                 <p><?= $gig['type'] ?></p>
                 <p><?= $gig['location'] ?></p>
                 <p><?= $gig['client'] ?></p>
-                <p><?= $gig['status'] ?></p>
+                <p><?= $gig['status'] === '1' ? 'Confirmed' : 'Canceled' ?></p>
                 <p>
-                    <a href="<?= base_url() . 'gigs/' . $gig['id'] ?>">View</a>
-                    <a href="">Calendar</a>
-                    <a href="">Edit</a>
-                    <a href="">Cancel</a>
+                    <a href="<?= base_url() . 'gigs/' . $gig['id'] ?>"><i class="far fa-eye"></i></a>
+                    <a href=""><i class="far fa-calendar-plus"></i></a>
+                    <a href=""><i class="far fa-edit"></i></a>
+                    <a href=""><i class="far fa-times-circle"></i></a>
                 </p>
             </div>
         <?php endforeach; ?>
     </div>
 </div>
 
-<ul id="pagination" class="row my-5 justify-content-center">
+<ul id="pagination" class="row justify-content-center">
     <li class="mr-2">
-        <a href=""><i class="fas fa-angle-double-left"></i></a>
+        <a href=""><i class="fas fa-chevron-left"></i></a>
     </li>
     <?php
     for ($i = 1; $i <= $numberOfPages; $i++) : ?>
         <li class="mr-2"><a href='./?page=<?= $i ?>'><?= $i ?></a></li>
     <?php endfor; ?>
     <li>
-        <a href=""><i class="fas fa-angle-double-right"></i></a>
+        <a href=""><i class="fas fa-chevron-right"></i></a>
     </li>
 </ul>
