@@ -13,6 +13,13 @@
         data: {
             page: null
         },
+        computed: {
+            generatePassword() {
+                return Math.random().toString(36).slice(2) +
+                    Math.random().toString(36)
+                    .toUpperCase().slice(2);
+            }
+        },
         methods: {
             toCurrency(num) {
                 const toNum = Number(num)
