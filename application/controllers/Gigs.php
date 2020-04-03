@@ -22,4 +22,11 @@ class Gigs extends CI_Controller
         $this->load->view('gigs/view', $data);
         $this->load->view('templates/footer');
     }
+
+    public function create()
+    {
+        $this->load->view('templates/header');
+        $this->load->view('gigs/create');
+        $this->load->view('templates/footer');
+    }
 }
