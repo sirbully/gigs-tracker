@@ -67,15 +67,48 @@ h3 {
 	margin-bottom: -0.5rem;
 }
 
+#add-gig {
+	position: relative;
+	bottom: -25px;
+	right: -86%;
+}
+
+#add-gig span {
+	border-top: 2px solid rgb(34, 34, 34);
+	padding: 5px 10px 9px;
+	font-family: "IBM Plex Mono", Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+	transition: background 0.5s ease;
+}
+
+#add-gig span:hover {
+	background: rgb(34, 34, 34);
+	color: #fff;
+}
+
+#add-gig span::before {
+	content: "\f067";
+	font-weight: 900;
+	font-family: "Font Awesome 5 Free";
+	margin-right: 5px;
+	color: rgb(34, 34, 34);
+}
+
+#add-gig span:hover::before {
+	content: "\f067";
+	font-weight: 900;
+	font-family: "Font Awesome 5 Free";
+	color: #fff;
+}
+
 #table {
 	width: 100%;
 	text-align: left;
-	margin-top: 45px;
+	margin: 45px 0;
 }
 
 #thead {
 	background: #f9f3f2;
-	/* color: #fff; */
 	border-top: 2px solid #000;
 	border-bottom: 2px solid #000;
 	position: sticky;
@@ -87,7 +120,6 @@ h3 {
 	text-transform: uppercase;
 	letter-spacing: 0.05rem;
 	padding: 20px 10px;
-	/* border-right: 2px solid #000; */
 }
 
 #thead span {
@@ -95,6 +127,29 @@ h3 {
 	background: rgb(34, 34, 34);
 	padding: 5px 10px;
 	font-size: 1.4rem;
+}
+
+#thead i {
+	font-size: 2.25rem;
+	margin-right: 10px;
+	color: rgb(34, 34, 34);
+}
+
+.tbody,
+.trow {
+	border-bottom: 2px solid #000;
+	align-items: center;
+}
+
+.tbody:last-child,
+.trow:last-child {
+	border-bottom: none;
+}
+
+.tbody > p,
+.trow > p {
+	flex: 1 1 auto;
+	padding: 20px 10px;
 }
 
 #thead > p:nth-child(2),
@@ -118,24 +173,41 @@ h3 {
 	flex: 1 1 20%;
 }
 
-#thead > p:last-child {
-	border-right: none;
+.trow > p:first-child {
+	flex: 1 1 20%;
+	font-family: "IBM Plex Mono", Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
 }
 
-.tbody {
-	border-bottom: 2px solid #000;
+.trow > p:last-child {
+	flex: 1 1 80%;
 }
 
-.tbody > p {
-	flex: 1 1 auto;
-	padding: 20px 10px;
-	/* border-right: 2px solid #000; */
+#view-action {
+	display: flex;
 }
 
-.tbody > p:last-child {
-	border-right: none;
+#view-action a {
+	display: flex;
+	flex-direction: column;
 }
 
-.tbody:last-child {
-	border-bottom: none;
+#view-action a:first-child,
+#view-action a:nth-child(2) {
+	align-items: center;
+	margin-right: 20px;
+}
+
+#view-action a:last-child {
+	align-items: center;
+	margin-left: 15px;
+}
+
+#view-action a i {
+	margin-right: 0;
+}
+
+#view-action small {
+	font-family: "IBM Plex Mono", Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
 }
