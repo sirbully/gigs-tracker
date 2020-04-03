@@ -9,23 +9,27 @@
     <script src="https://kit.fontawesome.com/134fbda4cd.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<?php echo asset_url(); ?>css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <title>Gigs Tracker</title>
+    <title>Mister Shakes</title>
 </head>
 
 <body>
     <div id="app">
-        <nav class="container d-flex align-items-center justify-content-between">
-            <div class="brand">
-                <a href="<?= base_url() ?>">Mister Shakes</a>
-            </div>
-            <ul class="d-flex">
-                <li class="p-2"><a class="<?= $this->router->class === 'gigs' ? 'active' : '' ?>" href="<?= base_url() ?>">Gigs</a></li>
-                <li class="p-2"><a class="<?= $this->router->class === 'musicians' ? 'active' : '' ?>" href="<?= base_url() ?>musicians">Musicians</a></li>
-                <li class="p-2"><a class="<?= $this->router->class === 'activity' ? 'active' : '' ?>" href="<?= base_url() ?>activity">Activity</a></li>
-                <li class="p-2"><a class="<?= $this->router->class === 'settings' ? 'active' : '' ?>" href="<?= base_url() ?>settings">Settings</a></li>
-            </ul>
-            <a class="web-logout" href="<?= base_url() ?>/logout">Logout</a>
-        </nav>
+        <?php if ($this->session->has_userdata('isloggedin')) : ?>
+            <nav class="container d-flex align-items-center justify-content-between">
+                <div class="brand">
+                    <a href="<?= base_url() ?>">Mister Shakes</a>
+                </div>
+                <ul class="d-flex">
+                    <li class="p-2"><a class="<?= $this->router->class === 'gigs' ? 'active' : '' ?>" href="<?= base_url() ?>">Gigs</a></li>
+                    <?php if ($this->session->userdata('isAdmin')) : ?>
+                        <li class="p-2"><a class="<?= $this->router->class === 'musicians' ? 'active' : '' ?>" href="<?= base_url() ?>musicians">Musicians</a></li>
+                    <?php endif; ?>
+                    <li class="p-2"><a class="<?= $this->router->class === 'activity' ? 'active' : '' ?>" href="<?= base_url() ?>activity">Activity</a></li>
+                    <li class="p-2"><a class="<?= $this->router->class === 'settings' ? 'active' : '' ?>" href="<?= base_url() ?>settings">Settings</a></li>
+                </ul>
+                <a class="web-logout" href="<?= base_url() ?>/members/logout">Logout</a>
+            </nav>
+        <?php endif; ?>
 
         <div id="snackbar">Some text some message..</div>
         <div class="container">
