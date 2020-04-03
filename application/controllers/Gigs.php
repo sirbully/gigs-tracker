@@ -38,7 +38,7 @@ class Gigs extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->gig_model->new_gig();
-            // $this->session->set_flashdata('success', 1);
+            $this->session->set_flashdata('create-gig', "The gig was successfully added!");
             redirect("gigs");
         }
     }
@@ -60,7 +60,7 @@ class Gigs extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->gig_model->edit_gig($id);
-            // $this->session->set_flashdata('success', 1);
+            $this->session->set_flashdata('edit-gig', "The gig was successfully updated!");
             redirect("gigs");
         }
     }
@@ -68,7 +68,7 @@ class Gigs extends CI_Controller
     public function delete($id)
     {
         $this->gig_model->delete_gig($id);
-        // $this->session->set_flashdata('success', 1);
+        $this->session->set_flashdata('delete-gig', "The gig was successfully deleted!");
         redirect("gigs");
     }
 }
