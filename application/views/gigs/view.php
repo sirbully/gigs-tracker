@@ -17,14 +17,16 @@
                     <i class="far fa-calendar-plus"></i>
                     <small>Calendar</small>
                 </a>
-                <a href="<?= base_url() ?>gigs/edit/<?= $gig['id'] ?>">
-                    <i class="far fa-edit"></i>
-                    <small>Edit</small>
-                </a>
-                <a href="<?= base_url() ?>gigs/delete/<?= $gig['id'] ?>">
-                    <i class="far fa-trash-alt"></i>
-                    <small>Delete</small>
-                </a>
+                <?php if ($this->session->userdata('isAdmin')) : ?>
+                    <a href="<?= base_url() ?>gigs/edit/<?= $gig['id'] ?>">
+                        <i class="far fa-edit"></i>
+                        <small>Edit</small>
+                    </a>
+                    <a href="<?= base_url() ?>gigs/delete/<?= $gig['id'] ?>">
+                        <i class="far fa-trash-alt"></i>
+                        <small>Delete</small>
+                    </a>
+                <?php endif; ?>
             </div>
         </div>
         <div class="row trow">
