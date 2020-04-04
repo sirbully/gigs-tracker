@@ -18,8 +18,8 @@
             <?php if ($this->session->flashdata('login-fail')) : ?>
                 <h3 class="mb-3" style="padding: 5px 10px; background: rgb(34,34,34); color: #fff;"><?= $this->session->flashdata('login-fail') ?></h3>
             <?php endif; ?>
-            <?php if ($this->session->flashdata('logout')) : ?>
-                <h3 class="mb-3" style="padding: 5px 10px; background: rgb(34,34,34); color: #fff;"><?= $this->session->flashdata('logout') ?></h3>
+            <?php if ($this->session->flashdata('settings')) : ?>
+                <h3 class="mb-3" style="padding: 5px 10px; background: rgb(34,34,34); color: #fff;"><?= $this->session->flashdata('settings') ?></h3>
             <?php endif; ?>
             <form action="<?= base_url() ?>members/login" method="post" style="width: 40%">
                 <div class="row mb-3">
