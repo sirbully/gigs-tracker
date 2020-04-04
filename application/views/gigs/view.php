@@ -1,5 +1,5 @@
 <h3>Detailed worksheet for</h3>
-<h1><?= date_format(new DateTime($gig['date']), 'D M jS, Y') ?></h1>
+<h1><?= date_format(new DateTime($gig[0]['date']), 'D M jS, Y') ?></h1>
 
 <div id="table">
     <div class="container">
@@ -18,11 +18,11 @@
                     <small>Calendar</small>
                 </a>
                 <?php if ($this->session->userdata('isAdmin')) : ?>
-                    <a href="<?= base_url() ?>gigs/edit/<?= $gig['id'] ?>">
+                    <a href="<?= base_url() ?>gigs/edit/<?= $gig[0]['gig_id'] ?>">
                         <i class="far fa-edit"></i>
                         <small>Edit</small>
                     </a>
-                    <a href="<?= base_url() ?>gigs/delete/<?= $gig['id'] ?>">
+                    <a href="<?= base_url() ?>gigs/delete/<?= $gig[0]['gig_id'] ?>">
                         <i class="far fa-trash-alt"></i>
                         <small>Delete</small>
                     </a>
@@ -31,27 +31,35 @@
         </div>
         <div class="row trow">
             <p>Date</p>
-            <p><?= date_format(new DateTime($gig['date']), 'l F j, Y') ?></p>
+            <p><?= date_format(new DateTime($gig[0]['date']), 'l F j, Y') ?></p>
         </div>
         <div class="row trow">
             <p>Type</p>
-            <p><?= $gig['type'] ?></p>
+            <p><?= $gig[0]['type'] ?></p>
         </div>
         <div class="row trow">
             <p>Location</p>
-            <p><?= $gig['location'] ?></p>
+            <p><?= $gig[0]['location'] ?></p>
         </div>
         <div class="row trow">
             <p>Client</p>
-            <p><?= $gig['client'] ?></p>
+            <p><?= $gig[0]['client'] ?></p>
         </div>
         <div class="row trow">
             <p>Dresscode</p>
-            <p><?= $gig['dress'] ?></p>
+            <p><?= $gig[0]['dress'] ?></p>
         </div>
         <div class="row trow">
             <p>Pay</p>
-            <p>{{ toCurrency(<?= $gig['pay'] ?>) }}</p>
+            <p>{{ toCurrency(<?= $gig[0]['pay'] ?>) }}</p>
+        </div>
+        <div class="row trow">
+            <p>Musicians</p>
+            <p id="p-musicians">
+                <?php foreach ($gig as $g) : ?>
+                    <span><?= $g['name'] ?></span>
+                <?php endforeach; ?>
+            </p>
         </div>
     </div>
 </div>
