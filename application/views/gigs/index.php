@@ -39,8 +39,12 @@
                         <a href="<?= base_url() . 'gigs/' . $gig['id'] ?>">
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="">
-                            <i class="far fa-calendar-plus"></i>
+                        <a class="add-to-calendar">
+                            <span class="start"><?= $gig['date'] ?></span>
+                            <!--span class="end">12/18/2018 10:00 AM</span-->
+                            <span class="allday">true</span>
+                            <span class="title">[<?= $gig['type'] ?>] <?= $gig['client'] ?></span>
+                            <span class="location"><?= $gig['location'] ?></span>
                         </a>
                         <?php if ($this->session->userdata('isAdmin')) : ?>
                             <a href="<?= base_url() ?>gigs/edit/<?= $gig['id'] ?>">
@@ -48,6 +52,14 @@
                             </a>
                             <a href="<?= base_url() ?>gigs/delete/<?= $gig['id'] ?>">
                                 <i class="far fa-trash-alt"></i>
+                            </a>
+                        <?php endif; ?>
+                        <?php if (!$this->session->userdata('isAdmin')) : ?>
+                            <a href="<?= $gig['status'] == 1 ? '' : base_url() . 'gigs/accept/' . $gig['gig_id'] ?>">
+                                <?= $gig['status'] == 1 ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-check"></i>' ?>
+                            </a>
+                            <a href="<?= !$gig['status'] ? '' : base_url() . 'gigs/reject/' . $gig['gig_id'] ?>">
+                                <?= !$gig['status'] ? '<i class="fas fa-times-circle"></i>' : '<i class="fas fa-times"></i>' ?>
                             </a>
                         <?php endif; ?>
                     </p>
