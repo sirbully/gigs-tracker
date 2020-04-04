@@ -30,15 +30,16 @@
             <input type="number" style="<?= form_error('pay') ? 'border: 2px solid #E8072A' : '' ?>" name="pay" placeholder="Type here" value="<?= set_value('pay'); ?>">
         </div>
         <div class="form-group justify-content-start">
-            <label>Musicians:</label>
+            <label style="<?= form_error('musician[]') ? 'background:#E8072A' : '' ?>">Musicians:</label>
         </div>
         <div style="text-align:left; margin-bottom: 2rem;">
+            <?= '<div class="mb-3" style="color:red">' . form_error('musician[]') . '</div>' ?>
             <?php if (empty($musicians)) : ?>
                 <p>No registered musicians.</p>
                 <?php else :
                 foreach ($musicians as $musician) : ?>
                     <label class="check-input"><?= $musician['name'] ?>
-                        <input type="checkbox" name="musician[]" value="<?= $musician['id'] ?>">
+                        <input type="checkbox" name="musician[]" value="<?= $musician['id'] ?>" <?= set_value('musician[]') == $musician['id'] ? 'checked' : '' ?>>
                         <span class="checkmark"></span>
                     </label>
             <?php endforeach;
