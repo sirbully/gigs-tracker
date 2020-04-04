@@ -22,7 +22,8 @@ class Gig_model extends CI_Model
         return $query->result_array();
     }
 
-    public function get_gig_musician($id)
+    // Get specific gig with musicians info for admin
+    public function get_gig_musicians($id)
     {
         $this->db->select('*');
         $this->db->from('approves');
@@ -31,6 +32,40 @@ class Gig_model extends CI_Model
         $this->db->where('approves.gig_id', $id);
         $query = $this->db->get();
         return $query->result_array();
+    }
+
+    // Get gigs of specific musician
+    public function get_gigs_musician($id)
+    {
+        $this->db->select('*');
+        $this->db->from('approves');
+        $this->db->join('gigs', 'gigs.id = approves.gig_id');
+        $this->db->where('approves.user_id', $id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // Get specific gig of specific musician
+    public function get_gig_musician($gig_id, $user_id)
+    {
+        $this->db->select('*');
+        $this->db->from('approves');
+        $this->db->join('gigs', 'gigs.id = approves.gig_id');
+        $this->db->where('approves.gig_id', $gig_id);
+        $this->db->where('approves.user_id', $user_id);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function decide_status($gig_id, $status)
+    {
+        $data = array(
+            'status' => $status,
+        );
+
+        $this->db->where('user_id', $this->session->userdata('user_id'));
+        $this->db->where('gig_id', $gig_id);
+        return $this->db->update('approves', $data);
     }
 
     public function new_gig()
@@ -89,11 +124,6 @@ class Gig_model extends CI_Model
             $this->db->insert('approves', $data);
         }
         return true;
-    }
-
-    public function decide_status()
-    {
-        //
     }
 
     public function delete_gig($id)
