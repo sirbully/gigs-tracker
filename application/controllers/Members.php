@@ -45,7 +45,9 @@ class Members extends CI_Controller
         $this->session->unset_userdata('isAdmin');
         $this->session->unset_userdata('isloggedin');
 
-        $this->session->set_flashdata('logout', "You have logged out");
+        if ($this->session->flashdata('settings')) {
+            $this->session->set_flashdata('settings', "You've been logged out for updating your settings.");
+        }
         redirect("members");
     }
 }
