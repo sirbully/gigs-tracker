@@ -15,14 +15,13 @@ class Emails extends CI_Controller
 
     public function send_welcome()
     {
-        $this->load->config('email');
+        $data = $this->session->flashdata('data');
 
-        $data['name'] = $this->input->post('name');
-        $data['password'] = $this->input->post('password');
+        $this->load->config('email');
 
         $this->email->set_newline("\r\n");
         $this->email->from($this->config->item('smtp_user'), 'Mister Shakes');
-        $this->email->to($this->input->post('email'));
+        $this->email->to($data['email']);
         $this->email->subject('Welcome!');
         $this->email->message($this->load->view('emails/add_user', $data, true));
 
