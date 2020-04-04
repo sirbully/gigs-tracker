@@ -5,7 +5,6 @@
     <title>Mister Shakes Gigs Tracker</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:600|IBM+Plex+Sans&display=swap" rel="stylesheet">
 
     <style type="text/css">
         body {
@@ -39,7 +38,7 @@
             width: 30%;
             border-top: 2px solid #000;
             border-bottom: 2px solid #000;
-            padding: 25px;
+            padding: 10px 25px;
         }
 
         label {
