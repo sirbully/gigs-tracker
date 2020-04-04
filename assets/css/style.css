@@ -226,6 +226,7 @@ label {
 
 #view-action {
 	display: flex;
+	align-items: center;
 }
 
 #view-action a {
@@ -269,6 +270,59 @@ label {
 
 #p-musicians span:last-child::after {
 	content: "";
+}
+
+/* OUICal2 */
+
+span#calendar-style {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	color: #000;
+	background: transparent;
+	padding: 0 !important;
+	font-size: 1rem;
+	margin-right: 20px;
+}
+
+span#calendar-style > span {
+	background: transparent;
+	padding: 0 !important;
+}
+
+div.add-to-calendar-widget {
+	margin: 0;
+	font-size: 1rem;
+}
+
+div.add-to-calendar-widget > label > i {
+	margin-right: 0 !important;
+}
+
+div.add-to-calendar-dropdown a {
+	color: #000;
+	display: flex !important;
+	flex-direction: row !important;
+	margin: 0 !important;
+}
+
+.add-to-calendar > .add-to-calendar-widget {
+	display: inherit !important;
+}
+
+.add-to-calendar-checkbox + div.add-to-calendar-dropdown a:before {
+	font-weight: 400;
+	font-family: "Font Awesome 5 Brands";
+	margin-right: 0.5rem;
+}
+
+.icon-google:before {
+	content: "\f1a0";
+}
+
+.icon-ical:before {
+	content: "\f179";
 }
 
 /* SNACKBAR */
