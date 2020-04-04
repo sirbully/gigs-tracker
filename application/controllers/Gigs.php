@@ -68,8 +68,12 @@ class Gigs extends CI_Controller
             $this->gig_model->new_gig();
             $this->gig_model->assign_user($this->db->insert_id(), $this->input->post('musician'));
 
-            $this->session->set_flashdata('create-gig', "The gig was successfully added!");
-            redirect("gigs");
+            $data = array(
+                'gig' => $this->db->insert_id(),
+                'musician' => $this->input->post('musician')
+            );
+            $this->session->set_flashdata('data', $data);
+            redirect("emails/new_gig");
         }
     }
 
