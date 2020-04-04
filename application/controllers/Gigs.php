@@ -12,7 +12,11 @@ class Gigs extends CI_Controller
 
     public function index()
     {
-        $data['gigs'] = $this->gig_model->get_gigs();
+        if ($this->session->userdata('isAdmin')) {
+            $data['gigs'] = $this->gig_model->get_gigs();
+        } else {
+            $data['gigs'] = $this->gig_model->get_gigs_musician($this->session->userdata('user_id'));
+        }
 
         $this->load->view('templates/header');
         $this->load->view('gigs/index', $data);
@@ -21,14 +25,22 @@ class Gigs extends CI_Controller
 
     public function view($id = NULL)
     {
-        $data['gig'] = $this->gig_model->get_gig_musician($id);
+        if ($this->session->userdata('isAdmin')) {
+            $data['gig'] = $this->gig_model->get_gig_musicians($id);
+        } else {
+            $data['gig'] = $this->gig_model->get_gig_musician($id, $this->session->userdata('user_id'));
+        }
 
         if (empty($data['gig'])) {
             show_404();
         }
 
         $this->load->view('templates/header');
-        $this->load->view('gigs/view', $data);
+        if ($this->session->userdata('isAdmin')) {
+            $this->load->view('gigs/view', $data);
+        } else {
+            $this->load->view('gigs/view2', $data);
+        }
         $this->load->view('templates/footer');
     }
 
@@ -87,7 +99,7 @@ class Gigs extends CI_Controller
             $this->gig_model->update_assign($id, $this->input->post('musician'));
 
             $this->session->set_flashdata('edit-gig', "The gig was successfully updated!");
-            redirect("gigs/view/$id");
+            redirect("gigs/$id");
         }
     }
 
@@ -100,5 +112,19 @@ class Gigs extends CI_Controller
         $this->gig_model->delete_gig($id);
         $this->session->set_flashdata('delete-gig', "The gig was successfully deleted!");
         redirect("gigs");
+    }
+
+    public function accept($id)
+    {
+        $this->gig_model->decide_status($id, 1);
+        $this->session->set_flashdata('decide-gig', "You've accepted the gig!");
+        redirect("gigs/$id");
+    }
+
+    public function reject($id)
+    {
+        $this->gig_model->decide_status($id, 0);
+        $this->session->set_flashdata('decide-gig', "You've rejected the gig!");
+        redirect("gigs/$id");
     }
 }
