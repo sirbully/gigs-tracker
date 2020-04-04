@@ -14,8 +14,23 @@ class Gig_model extends CI_Model
             return $query->result_array();
         }
 
-        $query = $this->db->get_where('gigs', array('id' => $id));
-        return $query->row_array();
+        $this->db->select('*');
+        $this->db->from('gigs');
+        $this->db->join('approves', 'approves.gig_id = gigs.id');
+        $this->db->where('gigs.id', $id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function get_gig_musician($id)
+    {
+        $this->db->select('*');
+        $this->db->from('approves');
+        $this->db->join('gigs', 'gigs.id = approves.gig_id');
+        $this->db->join('users', 'users.id = approves.user_id');
+        $this->db->where('approves.gig_id', $id);
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
     public function new_gig()
@@ -45,6 +60,40 @@ class Gig_model extends CI_Model
 
         $this->db->where('id', $id);
         return $this->db->update('gigs', $data);
+    }
+
+    public function assign_user($gig, $musician)
+    {
+        foreach ($musician as $id) {
+            $data = array(
+                'user_id' => $id,
+                'gig_id' => $gig
+            );
+
+            $this->db->insert('approves', $data);
+        }
+        return true;
+    }
+
+    public function update_assign($gig, $musician)
+    {
+        $this->db->where('gig_id', $gig);
+        $this->db->delete('approves');
+
+        foreach ($musician as $id) {
+            $data = array(
+                'user_id' => $id,
+                'gig_id' => $gig
+            );
+
+            $this->db->insert('approves', $data);
+        }
+        return true;
+    }
+
+    public function decide_status()
+    {
+        //
     }
 
     public function delete_gig($id)
