@@ -13,19 +13,29 @@
                     <i class="fas fa-arrow-left"></i>
                     <small>Go Back</small>
                 </a>
-                <a>
-                    <i class="far fa-calendar-plus"></i>
+                <span id="calendar-style">
+                    <span class="add-to-calendar">
+                        <span class="start"><?= $gig['date'] ?></span>
+                        <!--span class="end">12/18/2018 10:00 AM</span-->
+                        <span class="allday">true</span>
+                        <span class="title">[<?= $gig['type'] ?>] <?= $gig['client'] ?></span>
+                        <span class="location"><?= $gig['location'] ?></span>
+                    </span>
                     <small>Calendar</small>
-                </a>
-                <?php if ($gig['status'] == -1) : ?>
-                    <a href="<?= $gig['status'] == 1 ? '' : base_url() . 'gigs/accept/' . $gig['gig_id'] ?>">
-                        <?= $gig['status'] == 1 ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-check"></i>' ?>
-                        <small><?= $gig['status'] == 1 ? 'Accepted' : 'Accept' ?></small>
-                    </a>
-                    <a href="<?= !$gig['status'] ? '' : base_url() . 'gigs/reject/' . $gig['gig_id'] ?>">
-                        <?= !$gig['status'] ? '<i class="fas fa-times-circle"></i>' : '<i class="fas fa-times"></i>' ?>
-                        <small><?= !$gig['status'] ? 'Rejected' : 'Reject' ?></small>
-                    </a>
+                </span>
+                <?php if (!$this->session->userdata('isAdmin')) : ?>
+                    <?php if ($gig['status'] == 1 || $gig['status'] == -1) : ?>
+                        <a href="<?= $gig['status'] == 1 ? '/' : base_url() . 'gigs/accept/' . $gig['gig_id'] ?>">
+                            <?= $gig['status'] == 1 ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-check"></i>' ?>
+                            <small><?= $gig['status'] == 1 ? 'Accepted' : 'Accept' ?></small>
+                        </a>
+                    <?php endif; ?>
+                    <?php if ($gig['status'] == 0 || $gig['status'] == -1) : ?>
+                        <a href="<?= $gig['status'] == 0 ? '' : base_url() . 'gigs/reject/' . $gig['gig_id'] ?>">
+                            <?= $gig['status'] == 0 ? '<i class="fas fa-times-circle"></i>' : '<i class="fas fa-times"></i>' ?>
+                            <small><?= $gig['status'] == 0  ? 'Rejected' : 'Reject' ?></small>
+                        </a>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
         </div>
