@@ -12,23 +12,23 @@
         </div>
         <div class="form-group">
             <label <?= form_error('type') ? 'style="background:#E8072A"' : '' ?>>Type:</label>
-            <input type="text" <?= form_error('type') ? 'style="border: 2px solid #E8072A"' : '' ?>" name="type" value="<?= $gig[0]['type'] ?>">
+            <input type="text" <?= form_error('type') ? 'style="border: 2px solid #E8072A"' : '' ?> name="type" value="<?= $gig[0]['type'] ?>">
         </div>
         <div class="form-group">
             <label <?= form_error('location') ? 'style="background:#E8072A"' : '' ?>>Location:</label>
-            <input type="text" <?= form_error('location') ? 'style="border: 2px solid #E8072A"' : '' ?>" name="location" value="<?= $gig[0]['location'] ?>">
+            <input type="text" <?= form_error('location') ? 'style="border: 2px solid #E8072A"' : '' ?> name="location" value="<?= $gig[0]['location'] ?>">
         </div>
         <div class="form-group">
             <label <?= form_error('client') ? 'style="background:#E8072A"' : '' ?>>Client:</label>
-            <input type="text" <?= form_error('client') ? 'style="border: 2px solid #E8072A"' : '' ?>" name="client" value="<?= $gig[0]['client'] ?>">
+            <input type="text" <?= form_error('client') ? 'style="border: 2px solid #E8072A"' : '' ?> name="client" value="<?= $gig[0]['client'] ?>">
         </div>
         <div class="form-group">
             <label <?= form_error('dress') ? 'style="background:#E8072A"' : '' ?>>Dress Code:</label>
-            <input type="text" <?= form_error('dress') ? 'style="border: 2px solid #E8072A"' : '' ?>" name="dress" value="<?= $gig[0]['dress'] ?>">
+            <input type="text" <?= form_error('dress') ? 'style="border: 2px solid #E8072A"' : '' ?> name="dress" value="<?= $gig[0]['dress'] ?>">
         </div>
         <div class="form-group">
             <label <?= form_error('pay') ? 'style="background:#E8072A"' : '' ?>>Pay:</label>
-            <input type="number" <?= form_error('pay') ? 'style="border: 2px solid #E8072A"' : '' ?>" name="pay" value="<?= $gig[0]['pay'] ?>">
+            <input type="number" <?= form_error('pay') ? 'style="border: 2px solid #E8072A"' : '' ?> name="pay" value="<?= $gig[0]['pay'] ?>">
         </div>
         <div class="form-group justify-content-start">
             <label <?= form_error('musician[]') ? 'style="background:#E8072A"' : '' ?>>Musicians:</label>
