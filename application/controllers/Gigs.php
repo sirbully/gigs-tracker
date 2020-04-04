@@ -21,7 +21,7 @@ class Gigs extends CI_Controller
 
     public function view($id = NULL)
     {
-        $data['gig'] = $this->gig_model->get_gigs($id);
+        $data['gig'] = $this->gig_model->get_gig_musician($id);
 
         if (empty($data['gig'])) {
             show_404();
@@ -34,6 +34,8 @@ class Gigs extends CI_Controller
 
     public function create()
     {
+        $data['musicians'] = $this->musician_model->get_musicians();
+
         if (!$this->session->userdata('isAdmin')) {
             show_404();
         }
@@ -44,13 +46,16 @@ class Gigs extends CI_Controller
         $this->form_validation->set_rules('client', 'Client', 'required');
         $this->form_validation->set_rules('dress', 'Dress code', 'required');
         $this->form_validation->set_rules('pay', 'Pay', 'required');
+        $this->form_validation->set_rules('musician[]', null, 'required');
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header');
-            $this->load->view('gigs/create');
+            $this->load->view('gigs/create', $data);
             $this->load->view('templates/footer');
         } else {
             $this->gig_model->new_gig();
+            $this->gig_model->assign_user($this->db->insert_id(), $this->input->post('musician'));
+
             $this->session->set_flashdata('create-gig', "The gig was successfully added!");
             redirect("gigs");
         }
@@ -68,8 +73,10 @@ class Gigs extends CI_Controller
         $this->form_validation->set_rules('client', 'Client', 'required');
         $this->form_validation->set_rules('dress', 'Dress code', 'required');
         $this->form_validation->set_rules('pay', 'Pay', 'required');
+        $this->form_validation->set_rules('musician[]', null, 'required');
 
         $data['gig'] = $this->gig_model->get_gigs($id);
+        $data['musicians'] = $this->musician_model->get_musicians();
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header');
@@ -77,8 +84,10 @@ class Gigs extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->gig_model->edit_gig($id);
+            $this->gig_model->update_assign($id, $this->input->post('musician'));
+
             $this->session->set_flashdata('edit-gig', "The gig was successfully updated!");
-            redirect("gigs");
+            redirect("gigs/view/$id");
         }
     }
 
