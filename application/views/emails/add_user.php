@@ -56,10 +56,10 @@
 <body>
     <div class="brand"><span>Mister Shakes</span></div>
     <div>
-        <p>Welcome, <?= 'name' ?>!</p>
+        <p>Welcome, <?= $name ?>!</p>
         <p>You have just been added to track your gigs at <a href="http://gigs.elliottrooney.co.uk/members">http://gigs.elliottrooney.co.uk/members</a>. You may now login using your email along with the password below.</p>
         <div id="info">
-            <label>Password:</label> <?= 'password' ?>
+            <label>Password:</label> <?= $password ?>
         </div>
     </div>
 </body>
