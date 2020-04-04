@@ -18,7 +18,8 @@
         }
 
         a {
-            color: #000;
+            color: #fff;
+            text-decoration: none;
         }
 
         .brand {
@@ -58,7 +59,7 @@
         <p>Hi, <?= $name ?>!</p>
         <p>You have a gig! Check out the details by clicking the link below.</p>
         <div id="info">
-            <label><a href="http://gigs.elliottrooney.co.uk/gigs/<?= $gig ?>">View Gig</a></label>
+            <a href="http://gigs.elliottrooney.co.uk/gigs/<?= $gig ?>"><label>View Gig</label></a>
         </div>
     </div>
 </body>
