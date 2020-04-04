@@ -34,6 +34,12 @@ class Musicians extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->musician_model->new_musician();
+            $data = array(
+                'name' => $this->input->post('name'),
+                'email' => $this->input->post('email'),
+                'password' => $this->input->post('password')
+            );
+            $this->session->set_flashdata('data', $data);
             redirect("emails/send_welcome");
         }
     }
