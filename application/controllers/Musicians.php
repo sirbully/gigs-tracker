@@ -44,6 +44,20 @@ class Musicians extends CI_Controller
         }
     }
 
+    public function edit($id)
+    {
+        $this->musician_model->edit_musician($id);
+        $user = $this->musician_model->get_musicians($id);
+
+        $data = array(
+            'name' => $user['name'],
+            'email' => $user['email'],
+            'password' => $this->input->post('password')
+        );
+        $this->session->set_flashdata('data', $data);
+        redirect("emails/generate_pass");
+    }
+
     public function delete($id)
     {
         $this->musician_model->delete_musician($id);
