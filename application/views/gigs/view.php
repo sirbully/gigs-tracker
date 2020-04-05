@@ -57,7 +57,7 @@
             <p>Musicians</p>
             <p id="p-musicians">
                 <?php foreach ($gig as $g) : ?>
-                    <span><?= $g['name'] ?></span>
+                    <span><?= $g['name'] ?> <?= ($g['status'] == -1 ? '' : ($g['status'] == 1 ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-times-circle"></i>')) ?></span>
                 <?php endforeach; ?>
             </p>
         </div>
