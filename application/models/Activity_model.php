@@ -37,8 +37,9 @@ class Activity_model extends CI_Model
     {
         $new_status = $status == 1 ? 'accepted' : 'rejected';
         $query = $this->gig_model->get_gigs($id);
+        $the_date = date_format(new DateTime($query['date']), 'M jS, Y');
         $notif = array(
-            'message' => $this->session->userdata('user_name') . ' have ' . $new_status . ' the following gig: [' . date_format(new DateTime($query['date']), 'M jS, Y') . '] ' . $query['type'] . '',
+            'message' => $this->session->userdata('user_name') . ' have ' . $new_status . ' the following gig: [' . $the_date . '] ' . $query['type'],
             'user_id' => $this->session->userdata('user_id')
         );
 
