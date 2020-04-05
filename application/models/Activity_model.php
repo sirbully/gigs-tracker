@@ -14,7 +14,7 @@ class Activity_model extends CI_Model
 
     public function get_activity_musician($id)
     {
-        $query = $this->db->get('notifications', array('user_id' => $id));
+        $query = $this->db->get_where('notifications', array('user_id' => $id));
         return $query->result_array();
     }
 
