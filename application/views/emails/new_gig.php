@@ -59,7 +59,7 @@
         <p>Hi, <?= $name ?>!</p>
         <p>You have a gig! Check out the details by clicking the link below.</p>
         <div id="info">
-            <a href="http://gigs.elliottrooney.co.uk/gigs/<?= $gig ?>"><label>View Gig</label></a>
+            <a href="http://gigs.elliottrooney.co.uk/gigs/<?= $gig ?>"><label style="cursor:pointer">View Gig</label></a>
         </div>
     </div>
 </body>
