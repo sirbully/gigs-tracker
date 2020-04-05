@@ -30,6 +30,7 @@
                     <label><i class="fas fa-key"></i></label>
                     <input type="password" name="password" placeholder="Password" style="flex: 1 1 auto">
                 </div>
+                <p class="mb-4">Forgot password? Notify the webmaster to request a new one.</p>
                 <div class="row mt-4 justify-content-end">
                     <button type="submit">Sign In</button>
                 </div>
