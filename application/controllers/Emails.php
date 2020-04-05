@@ -58,25 +58,6 @@ class Emails extends CI_Controller
         redirect('gigs');
     }
 
-    public function request_pass()
-    {
-        $this->load->config('email');
-        $data = $this->session->flashdata('data');
-
-        $this->email->set_newline("\r\n");
-        $this->email->from($this->config->item('smtp_user'), 'Mister Shakes');
-        $this->email->to($data['email']);
-        $this->email->subject('Welcome!');
-        $this->email->message($this->load->view('emails/new_gig', $data, true));
-
-        if ($this->email->send()) {
-            $this->session->set_flashdata('add-user', "The musician was successfully added!");
-            redirect('musicians');
-        } else {
-            show_error($this->email->print_debugger());
-        }
-    }
-
     public function generate_pass()
     {
         $data = $this->session->flashdata('data');
@@ -85,19 +66,14 @@ class Emails extends CI_Controller
         $this->email->set_newline("\r\n");
         $this->email->from($this->config->item('smtp_user'), 'Mister Shakes');
         $this->email->to($data['email']);
-        $this->email->subject('Welcome!');
-        $this->email->message($this->load->view('emails/new_gig', $data, true));
+        $this->email->subject('Forgot Password?');
+        $this->email->message($this->load->view('emails/pass_user', $data, true));
 
         if ($this->email->send()) {
-            $this->session->set_flashdata('add-user', "The musician was successfully added!");
-            redirect('musicians');
+            $this->session->set_flashdata('new-pass', "A new password was generated successfully!");
+            redirect("musicians");
         } else {
             show_error($this->email->print_debugger());
         }
-    }
-
-    public function generator()
-    {
-        // generate pass
     }
 }
