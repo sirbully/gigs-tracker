@@ -6,11 +6,16 @@ class Musician_model extends CI_Model
         $this->load->database();
     }
 
-    public function get_musicians()
+    public function get_musicians($id = FALSE)
     {
-        $this->db->order_by('id', 'DESC');
-        $query = $this->db->get_where('users', array('isAdmin' => 0));
-        return $query->result_array();
+        if ($id === FALSE) {
+            $this->db->order_by('id', 'DESC');
+            $query = $this->db->get_where('users', array('isAdmin' => 0));
+            return $query->result_array();
+        }
+
+        $query = $this->db->get_where('users', array('id' => $id));
+        return $query->row_array();
     }
 
     public function new_musician()
@@ -22,6 +27,16 @@ class Musician_model extends CI_Model
         );
 
         return $this->db->insert('users', $data);
+    }
+
+    public function edit_musician($id)
+    {
+        $data = array(
+            'password' => $this->input->post('password')
+        );
+
+        $this->db->where('id', $id);
+        return $this->db->update('users', $data);
     }
 
     public function delete_musician($id)
