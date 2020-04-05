@@ -25,13 +25,13 @@
                 </span>
                 <?php if (!$this->session->userdata('isAdmin')) : ?>
                     <?php if ($gig['status'] == 1 || $gig['status'] == -1) : ?>
-                        <a href="<?= $gig['status'] == 1 ? '/' : base_url() . 'gigs/accept/' . $gig['gig_id'] ?>">
+                        <a <?= $gig['status'] == 1 ? '/' : 'href="' . base_url() . 'gigs/accept/' . $gig['gig_id'] . '"' ?>>
                             <?= $gig['status'] == 1 ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-check"></i>' ?>
                             <small><?= $gig['status'] == 1 ? 'Accepted' : 'Accept' ?></small>
                         </a>
                     <?php endif; ?>
                     <?php if ($gig['status'] == 0 || $gig['status'] == -1) : ?>
-                        <a href="<?= $gig['status'] == 0 ? '' : base_url() . 'gigs/reject/' . $gig['gig_id'] ?>">
+                        <a <?= $gig['status'] == 0 ? '' : 'href="' . base_url() . 'gigs/reject/' . $gig['gig_id'] . '"' ?>>
                             <?= $gig['status'] == 0 ? '<i class="fas fa-times-circle"></i>' : '<i class="fas fa-times"></i>' ?>
                             <small><?= $gig['status'] == 0  ? 'Rejected' : 'Reject' ?></small>
                         </a>

@@ -55,12 +55,16 @@
                             </a>
                         <?php endif; ?>
                         <?php if (!$this->session->userdata('isAdmin')) : ?>
-                            <a href="<?= $gig['status'] == 1 ? '' : base_url() . 'gigs/accept/' . $gig['gig_id'] ?>">
-                                <?= $gig['status'] == 1 ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-check"></i>' ?>
-                            </a>
-                            <a href="<?= !$gig['status'] ? '' : base_url() . 'gigs/reject/' . $gig['gig_id'] ?>">
-                                <?= !$gig['status'] ? '<i class="fas fa-times-circle"></i>' : '<i class="fas fa-times"></i>' ?>
-                            </a>
+                            <?php if ($gig['status'] == 1 || $gig['status'] == -1) : ?>
+                                <a <?= $gig['status'] == 1 ? '' : 'href="' . base_url() . 'gigs/accept/' . $gig['gig_id'] . '"' ?>>
+                                    <?= $gig['status'] == 1 ? '<i class="fas fa-check-circle"></i> Accepted' : '<i class="fas fa-check"></i>' ?>
+                                </a>
+                            <?php endif; ?>
+                            <?php if ($gig['status'] == 0 || $gig['status'] == -1) : ?>
+                                <a <?= !$gig['status'] ? '' : 'href="' . base_url() . 'gigs/reject/' . $gig['gig_id'] . '"' ?>>
+                                    <?= !$gig['status'] ? '<i class="fas fa-times-circle"></i> Rejected' : '<i class="fas fa-times"></i>' ?>
+                                </a>
+                            <?php endif; ?>
                         <?php endif; ?>
                     </p>
                 </div>
