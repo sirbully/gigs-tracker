@@ -113,6 +113,17 @@ class Gigs extends CI_Controller
             show_404();
         }
 
+        $gig = $this->gig_model->get_gig_musicians($id);
+
+        foreach ($gig as $g) {
+            $notif = array(
+                'message' => 'The gig with the following details was cancelled: [' . date_format(new DateTime($g['date']), 'M jS, Y') . '] ' . $g['type'],
+                'user_id' => $g['user_id']
+            );
+
+            $this->activity_model->cancel_gig($notif);
+        }
+
         $this->gig_model->delete_gig($id);
         $this->session->set_flashdata('delete-gig', "The gig was successfully deleted!");
         redirect("gigs");
@@ -121,6 +132,7 @@ class Gigs extends CI_Controller
     public function accept($id)
     {
         $this->gig_model->decide_status($id, 1);
+        $this->activity_model->decide_status($id, 1);
         $this->session->set_flashdata('decide-gig', "You've accepted the gig!");
         redirect("gigs/$id");
     }
@@ -128,6 +140,7 @@ class Gigs extends CI_Controller
     public function reject($id)
     {
         $this->gig_model->decide_status($id, 0);
+        $this->activity_model->decide_status($id, 0);
         $this->session->set_flashdata('decide-gig', "You've rejected the gig!");
         redirect("gigs/$id");
     }
