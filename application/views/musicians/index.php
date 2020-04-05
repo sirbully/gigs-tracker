@@ -28,11 +28,15 @@
                 <div class="row tbody">
                     <p><?= $musician['name'] ?></p>
                     <p><?= $musician['email'] ?></p>
-                    <p>
+                    <div style="flex: 1 1 15%;">
                         <a href="<?= base_url() ?>musicians/delete/<?= $musician['id'] ?>">
                             <i class="far fa-trash-alt"></i> Remove access
                         </a>
-                    </p>
+                        <form action="<?= base_url() ?>musicians/edit/<?= $musician['id'] ?>" method="post">
+                            <input type="hidden" name="password" :value="generatePassword">
+                            <button id="link2" type="submit"><i class="fas fa-key"></i> Generate new password</button>
+                        </form>
+                    </div>
                 </div>
         <?php endforeach;
         endif; ?>
