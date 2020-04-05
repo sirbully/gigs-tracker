@@ -105,7 +105,14 @@ class Gig_model extends CI_Model
                 'gig_id' => $gig
             );
 
+            $query = $this->member_model->get_musician($id);
+            $notif = array(
+                'message' => 'Added new gig for ' . $query['name'],
+                'user_id' => $id
+            );
+
             $this->db->insert('approves', $data);
+            $this->db->insert('notifications', $notif);
         }
         return true;
     }
