@@ -16,7 +16,7 @@ class Activity extends CI_Controller
         if ($this->session->userdata('isAdmin')) {
             $data['activity'] = $this->activity_model->get_activity();
         } else {
-            $data['activity'] = $this->activity_model->get_activity_musician($this->session->userdata('user_id'));
+            $data['activity'] = $this->activity_model->get_activity_musician();
         }
 
         $this->load->view('templates/header');
