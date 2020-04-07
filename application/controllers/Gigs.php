@@ -158,7 +158,7 @@ class Gigs extends CI_Controller
     {
         $this->gig_model->decide_status($id, 1);
         $this->activity_model->decide_status($id, 1);
-        $this->session->set_flashdata('decide-gig', "You've accepted the gig!");
+        $this->session->set_flashdata('flash', "You've accepted the gig!");
         redirect("gigs/$id");
     }
 
@@ -166,7 +166,7 @@ class Gigs extends CI_Controller
     {
         $this->gig_model->decide_status($id, 0);
         $this->activity_model->decide_status($id, 0);
-        $this->session->set_flashdata('decide-gig', "You've rejected the gig!");
+        $this->session->set_flashdata('flash', "You've rejected the gig!");
         redirect("gigs/$id");
     }
 }
