@@ -1,8 +1,12 @@
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="<?= asset_url() ?>js/jquery.min.js"></script>
+<script src="<?= asset_url() ?>js/popper.min.js"></script>
+<script src="<?= asset_url() ?>js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="<?= asset_url() ?>js/add-to-calendar.js"></script>
+<script src="<?= asset_url() ?>js/bootstrap-notify.min.js"></script>
 <script>
     var app = new Vue({
         el: '#app',
@@ -33,11 +37,25 @@
     })
 </script>
 <script>
+    <?php if ($this->session->flashdata('flash')) : ?>
+        $.notify({
+            message: '<?= $this->session->flashdata('flash'); ?>'
+        }, {
+            type: 'success',
+            delay: 800,
+        });
+    <?php endif; ?>
+
     document.onreadystatechange = () => {
         if (document.readyState == "interactive") {
             flatpickr("#datepicker", {});
         }
     }
+
+    document.getElementById('song-notes').onchange = function() {
+        const file = (this.value).replace(/.*[\/\\]/, '');
+        document.getElementById('song-notes-label').textContent = file;
+    };
 </script>
 
 </body>
