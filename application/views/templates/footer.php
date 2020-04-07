@@ -41,7 +41,7 @@
         $.notify({
             message: '<?= $this->session->flashdata('flash'); ?>'
         }, {
-            type: 'success',
+            type: 'primary',
             delay: 800,
         });
     <?php endif; ?>
