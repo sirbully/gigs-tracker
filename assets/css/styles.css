@@ -1,0 +1,84 @@
+.table .thead-dark th {
+	background-color: #1a1a1a;
+	border-color: #1a1a1a;
+}
+
+.table thead tr th,
+.table tbody tr td {
+	width: 20%;
+}
+
+#gig-view .table thead tr th:last-child,
+#gig-view .table tbody tr td:last-child {
+	width: 80%;
+}
+
+#gig-view .table thead tr th > a {
+	color: #fff;
+	padding: 0 5px;
+}
+
+#gig-body tr td:first-child,
+#table-gig .row > label {
+	text-transform: uppercase;
+	font-weight: 900;
+}
+
+#gig-body tr td:last-child {
+	color: #9e9e9e;
+}
+
+#musicians span::after {
+	content: ",";
+}
+
+#musicians span:last-child::after {
+	content: "";
+}
+
+/* OUICal2 */
+
+.add-to-calendar > .add-to-calendar-widget {
+	display: inline-block !important;
+	margin: 0 !important;
+}
+
+.add-to-calendar > .add-to-calendar-widget label {
+	margin-bottom: 0 !important;
+}
+
+.add-to-calendar-checkbox + div.add-to-calendar-dropdown a:before {
+	font-weight: 400;
+	font-family: "Font Awesome 5 Brands";
+	margin-right: 0.5rem;
+}
+
+.icon-google:before {
+	content: "\f1a0";
+}
+
+.icon-ical:before {
+	content: "\f179";
+}
+
+a#calendar-style .add-to-calendar-widget > label {
+	color: #fff !important;
+	font-size: inherit !important;
+}
+
+a#calendar-style .add-to-calendar-widget > label > i:hover {
+	text-decoration: underline !important;
+}
+
+a#calendar-style .add-to-calendar-widget > label > i::after {
+	content: " calendar";
+	font-size: 80%;
+	font-weight: 400;
+	font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+		"Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.add-to-calendar-dropdown a {
+	color: black !important;
+}
