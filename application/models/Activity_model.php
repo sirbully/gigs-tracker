@@ -8,12 +8,14 @@ class Activity_model extends CI_Model
 
     public function get_activity()
     {
+        $this->db->order_by('id', 'DESC');
         $query = $this->db->get('notifications');
         return $query->result_array();
     }
 
     public function get_activity_musician()
     {
+        $this->db->order_by('id', 'DESC');
         $query = $this->db->get_where('notifications', array('user_id' => $this->session->userdata('user_id')));
         return $query->result_array();
     }
@@ -26,6 +28,12 @@ class Activity_model extends CI_Model
         );
 
         return $this->db->insert('notifications', $notif);
+    }
+
+    public function remove_user($id)
+    {
+        $query = $this->musician_model->get_musicians($id);
+        return $this->db->insert('notifications', 'Revoked access from user: ' . $query['name']);
     }
 
     public function cancel_gig($notif)
