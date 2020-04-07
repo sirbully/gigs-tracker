@@ -33,7 +33,11 @@ class Activity_model extends CI_Model
     public function remove_user($id)
     {
         $query = $this->musician_model->get_musicians($id);
-        return $this->db->insert('notifications', 'Revoked access from user: ' . $query['name']);
+        $notif = array(
+            'message' => 'Revoked access from user: ' . $query['name'],
+            'user_id' => $this->session->userdata('user_id')
+        );
+        return $this->db->insert('notifications', $notif);
     }
 
     public function cancel_gig($notif)
