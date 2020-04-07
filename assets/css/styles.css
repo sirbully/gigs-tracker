@@ -8,12 +8,12 @@
 	width: 20%;
 }
 
-#gig-view .table thead tr th:last-child,
-#gig-view .table tbody tr td:last-child {
+#gig-view thead tr th:last-child,
+#gig-view tbody tr td:last-child {
 	width: 80%;
 }
 
-#gig-view .table thead tr th > a {
+#gig-view thead tr th > a {
 	color: #fff;
 	padding: 0 5px;
 }
@@ -34,6 +34,17 @@
 
 #musicians span:last-child::after {
 	content: "";
+}
+
+.custom-btn {
+	border: none;
+	background: transparent;
+	padding: 0;
+	letter-spacing: 1px;
+}
+
+.custom-btn:hover {
+	text-decoration: underline;
 }
 
 /* OUICal2 */
