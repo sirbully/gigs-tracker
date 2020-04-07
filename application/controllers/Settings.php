@@ -62,7 +62,7 @@ class Settings extends CI_Controller
             $this->load->view('templates/settings', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->setting_model->update(array('email' => $this->input->post('password')));
+            $this->setting_model->update(array('password' => $this->input->post('password')));
             $this->session->set_flashdata('settings', "You were logged out for updating your settings.");
             redirect("members/logout");
         }

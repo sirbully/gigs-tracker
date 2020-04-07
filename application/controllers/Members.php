@@ -29,7 +29,7 @@ class Members extends CI_Controller
 
                 $this->session->set_userdata($user_data);
 
-                $this->session->set_flashdata('login-success', "You are now logged in");
+                $this->session->set_flashdata('flash', "You are now logged in!");
                 redirect("gigs");
             } else {
                 $this->session->set_flashdata('login-fail', "Invalid login credentials");

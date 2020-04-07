@@ -26,7 +26,7 @@ class Emails extends CI_Controller
         $this->email->message($this->load->view('emails/add_user', $data, true));
 
         if ($this->email->send()) {
-            $this->session->set_flashdata('add-user', "The musician was successfully added!");
+            $this->session->set_flashdata('flash', "The musician was successfully added!");
             redirect('musicians');
         } else {
             show_error($this->email->print_debugger());
@@ -54,7 +54,7 @@ class Emails extends CI_Controller
                 show_error($this->email->print_debugger());
             }
         }
-        $this->session->set_flashdata('add-gig', "A new gig is added!");
+        $this->session->set_flashdata('flash', "A new gig was added!");
         redirect('gigs');
     }
 
@@ -70,7 +70,7 @@ class Emails extends CI_Controller
         $this->email->message($this->load->view('emails/pass_user', $data, true));
 
         if ($this->email->send()) {
-            $this->session->set_flashdata('new-pass', "A new password was generated successfully!");
+            $this->session->set_flashdata('flash', "A new password was generated successfully!");
             redirect("musicians");
         } else {
             show_error($this->email->print_debugger());
