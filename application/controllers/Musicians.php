@@ -61,8 +61,8 @@ class Musicians extends CI_Controller
 
     public function delete($id)
     {
-        $this->musician_model->delete_musician($id);
         $this->activity_model->remove_user($id);
+        $this->musician_model->delete_musician($id);
         $this->session->set_flashdata('flash', "The musician no longer has access to this page!");
         redirect("musicians");
     }
