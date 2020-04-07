@@ -71,12 +71,13 @@ class Gigs extends CI_Controller
                 $file = $this->upload->data('file_name');
             }
             $this->gig_model->new_gig($file);
-            $this->gig_model->assign_user($this->db->insert_id(), $this->input->post('musician'));
 
             $data = array(
                 'gig' => $this->db->insert_id(),
                 'musician' => $this->input->post('musician')
             );
+
+            $this->gig_model->assign_user($this->db->insert_id(), $this->input->post('musician'));
             $this->session->set_flashdata('data', $data);
             redirect("emails/new_gig");
         }
@@ -129,7 +130,6 @@ class Gigs extends CI_Controller
         }
 
         $gig = $this->gig_model->get_gig_musicians($id);
-        print_r($gig);
 
         foreach ($gig as $g) {
             $notif = array(
@@ -140,7 +140,10 @@ class Gigs extends CI_Controller
             $this->activity_model->cancel_gig($notif);
         }
 
-        unlink('uploads/' . $gig[0]['file']);
+        if ($gig[0]['file']) {
+            unlink('uploads/' . $gig[0]['file']);
+        }
+
         $this->gig_model->delete_gig($id);
         $this->session->set_flashdata('flash', "The gig was successfully deleted!");
         redirect("gigs");
