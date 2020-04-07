@@ -56,7 +56,7 @@ class Gigs extends CI_Controller
         $this->form_validation->set_rules('type', 'Type', 'required');
         $this->form_validation->set_rules('location', 'Location', 'required');
         $this->form_validation->set_rules('client', 'Client', 'required');
-        $this->form_validation->set_rules('dress', 'Dress code', 'required');
+        $this->form_validation->set_rules('sched', 'Schedule', 'required');
         $this->form_validation->set_rules('pay', 'Pay', 'required');
         $this->form_validation->set_rules('musician[]', null, 'required');
 
@@ -65,7 +65,12 @@ class Gigs extends CI_Controller
             $this->load->view('gigs/create', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->gig_model->new_gig();
+            $this->load->config('upload');
+            $this->load->library('upload');
+            if ($this->upload->do_upload('songnotes')) {
+                $file = $this->upload->data('file_name');
+            }
+            $this->gig_model->new_gig($file);
             $this->gig_model->assign_user($this->db->insert_id(), $this->input->post('musician'));
 
             $data = array(
@@ -87,7 +92,7 @@ class Gigs extends CI_Controller
         $this->form_validation->set_rules('type', 'Type', 'required');
         $this->form_validation->set_rules('location', 'Location', 'required');
         $this->form_validation->set_rules('client', 'Client', 'required');
-        $this->form_validation->set_rules('dress', 'Dress code', 'required');
+        $this->form_validation->set_rules('sched', 'Schedule', 'required');
         $this->form_validation->set_rules('pay', 'Pay', 'required');
         $this->form_validation->set_rules('musician[]', null, 'required');
 
@@ -99,10 +104,20 @@ class Gigs extends CI_Controller
             $this->load->view('gigs/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->gig_model->edit_gig($id);
+            if ($_FILES['songnotes']['size'] == 0) {
+                $this->gig_model->edit_gig($id);
+            } else {
+                $this->load->config('upload');
+                $this->load->library('upload');
+                if ($this->upload->do_upload('songnotes')) {
+                    $file = $this->upload->data('file_name');
+                }
+                $this->gig_model->edit_gig($id, $file);
+            }
+
             $this->gig_model->update_assign($id, $this->input->post('musician'));
 
-            $this->session->set_flashdata('edit-gig', "The gig was successfully updated!");
+            $this->session->set_flashdata('flash', "The gig was successfully updated!");
             redirect("gigs/$id");
         }
     }
@@ -114,6 +129,7 @@ class Gigs extends CI_Controller
         }
 
         $gig = $this->gig_model->get_gig_musicians($id);
+        print_r($gig);
 
         foreach ($gig as $g) {
             $notif = array(
@@ -124,9 +140,18 @@ class Gigs extends CI_Controller
             $this->activity_model->cancel_gig($notif);
         }
 
+        unlink('uploads/' . $gig[0]['file']);
         $this->gig_model->delete_gig($id);
-        $this->session->set_flashdata('delete-gig', "The gig was successfully deleted!");
+        $this->session->set_flashdata('flash', "The gig was successfully deleted!");
         redirect("gigs");
+    }
+
+    public function remove_file($file, $id)
+    {
+        $this->gig_model->delete_file($id);
+        unlink('uploads/' . $file);
+        $this->session->set_flashdata('flash', "The file was successfully deleted!");
+        redirect("gigs/edit/$id");
     }
 
     public function accept($id)
