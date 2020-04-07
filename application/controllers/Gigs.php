@@ -140,10 +140,7 @@ class Gigs extends CI_Controller
             $this->activity_model->cancel_gig($notif);
         }
 
-        if ($gig[0]['file']) {
-            unlink('uploads/' . $gig[0]['file']);
-        }
-
+        unlink('uploads/' . $gig[0]['file']);
         $this->gig_model->delete_gig($id);
         $this->session->set_flashdata('flash', "The gig was successfully deleted!");
         redirect("gigs");
