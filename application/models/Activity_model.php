@@ -47,7 +47,7 @@ class Activity_model extends CI_Model
         $query = $this->gig_model->get_gig_musician($id, $this->session->userdata('user_id'));
         $the_date = date_format(new DateTime($query['date']), 'M jS, Y');
         $notif = array(
-            'message' => $this->session->userdata('user_name') . ' have ' . $new_status . ' the following gig: [' . $the_date . '] ' . $query['type'],
+            'message' => $this->session->userdata('user_name') . ' has ' . $new_status . ' the following gig: [' . $the_date . '] ' . $query['type'],
             'user_id' => $this->session->userdata('user_id')
         );
 
