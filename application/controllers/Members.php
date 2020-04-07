@@ -19,7 +19,10 @@ class Members extends CI_Controller
 
             $user = $this->member_model->login($email, $password);
 
-            if ($user->id) {
+            if (empty($user)) {
+                $this->session->set_flashdata('login-fail', "Invalid login credentials");
+                redirect("members");
+            } else {
                 $user_data = array(
                     'user_id' => $user->id,
                     'user_name' => $user->name,
@@ -31,9 +34,6 @@ class Members extends CI_Controller
 
                 $this->session->set_flashdata('flash', "You are now logged in!");
                 redirect("gigs");
-            } else {
-                $this->session->set_flashdata('login-fail', "Invalid login credentials");
-                redirect("members");
             }
         }
     }
