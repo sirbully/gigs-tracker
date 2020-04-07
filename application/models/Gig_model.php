@@ -68,30 +68,35 @@ class Gig_model extends CI_Model
         return $this->db->update('approves', $data);
     }
 
-    public function new_gig()
+    public function new_gig($file)
     {
         $data = array(
             'date' => $this->input->post('date'),
             'type' => $this->input->post('type'),
             'location' => $this->input->post('location'),
             'client' => $this->input->post('client'),
-            'dress' => $this->input->post('dress'),
-            'pay' => $this->input->post('pay')
+            'sched' => $this->input->post('sched'),
+            'pay' => $this->input->post('pay'),
+            'file' => $file
         );
 
         return $this->db->insert('gigs', $data);
     }
 
-    public function edit_gig($id)
+    public function edit_gig($id, $file = NULL)
     {
         $data = array(
             'date' => $this->input->post('date'),
             'type' => $this->input->post('type'),
             'location' => $this->input->post('location'),
             'client' => $this->input->post('client'),
-            'dress' => $this->input->post('dress'),
-            'pay' => $this->input->post('pay')
+            'sched' => $this->input->post('sched'),
+            'pay' => $this->input->post('pay'),
         );
+
+        if ($file) {
+            $data['file'] = $file;
+        }
 
         $this->db->where('id', $id);
         return $this->db->update('gigs', $data);
@@ -131,6 +136,16 @@ class Gig_model extends CI_Model
             $this->db->insert('approves', $data);
         }
         return true;
+    }
+
+    public function delete_file($id)
+    {
+        $data = array(
+            'file' => NULL
+        );
+
+        $this->db->where('id', $id);
+        return $this->db->update('gigs', $data);
     }
 
     public function delete_gig($id)
